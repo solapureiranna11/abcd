@@ -1,0 +1,152 @@
+Spring :
+
+Spring is a dependancy injection framework to make java application loosly coupled.
+Spring framework makes  the easy developement of Java EE application.
+
+class A {
+           B b; <- dependency injection
+           void display(){
+		                 b.display();
+		           }
+				   
+	}
+	
+	Class B{
+	          void display(){
+			        //implementation
+					}
+					}
+					
+	Java EE & Spring
+	
+	 ============================
+	 
+	 IOC container :
+	  (Inversion of control ) 
+	  
+	  
+	 creating the object, holding them in memory , injecting them into another objects as required.
+	 to manage life cycle of bean/pojo class.
+	 
+	 
+	 steps :
+	 1 ) read the xml file.
+	 2) create the instatiation of xml bean(java classes)
+	 3)It will manage the life cycle of bean.
+	 4) passing the dynamic parameter to bean .
+	 
+	 
+	 2 types of Ioc Container:
+	 
+	 1) BeanFactory (I) : (scope = singleton)
+	    It is core container.
+		
+		Resource resource = new classPathResource("config.xml");
+		BeanFactory factory = new XmlBeanFactory(resource);
+	        Student student =(Student)factory.getBean("s");
+	 
+	 2 ) ApplicationContext (I): (scope = prototype)
+	 
+	      ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
+	 
+	 
+	 ================================================
+	 Benefits of Spring :
+	 
+	 1) Automatic template provide
+	 2) Loosly coupled :
+	       Dependency injection 
+	 3) Easy to test
+	 4) Light weight 
+	 5) Developement is also fast.
+	 
+	 =================================================
+	 Dependency Injection
+	 
+	 1) Setter Injection :
+	        setter method .
+			
+<bean id="s" class="Test.SpringProjectWithXml.Student">
+     <property name="studentName" value="Ram"></property>
+     <property name="marks" value="80"></property>
+     <property name="dept" value="It"></property>
+ </bean>
+	 
+	 2)Constructor Injection :
+	        parameterized Constructor
+<bean id="s" class="Test.SpringProjectWithXml.Student">
+	<constructor-arg value="Shyam"></constructor-arg>
+    <constructor-arg value="80"></constructor-arg>
+    <constructor-arg value="Comp"></constructor-arg>
+	 </bean>		
+	========================================================
+	
+	                                   BeanFactory                                                                 ApplicationContext
+1) implementation       XmlBeanFactory                                                       ClassPathXmlApplicationContext , AnnotationConfigApplicationContext
+2) Annotation based
+    DI                                    no                                                                               yes
+3) scope                            singleton                                                                    prototype
+4)loading                           lazy                                                                              eager
+
+H.w. Difference between Setter based injection and Constructor based injection
+==========================================================================
+Autowiring :
+
+Employee - bean/pojo
+Address - bean 
+
+types :
+
+1)byType : class & attribute datatype(Address & Address)
+2)byName : object & id  (address & address)
+3)constructor :
+4) autoDetect:
+
+=========================================================================
+Dependency Checking :
+
+Employee - 25 - 23 primitive / 2 cutom class. 
+1) simple.  <dependancy-check = "simple">
+     for premitive d.t. -> mandatory.
+2) objects  <dependancy-check = "objects">
+     for custom class / secondary fields -> mandatory
+3) all  <dependancy-check = "all">
+ all fields are mandatory.
+ 4) none <dependancy-check = "none">
+ 
+ ========================================================================
+ @Required annotation :
+ 
+    <context:annotation-config/>
+==================================================================
+ 
+ it is used to set the particular property of class as mandatory or required.
+ This is setter method level annotation.
+ 
+ @Component : = bean 
+ 
+ <context: comonent-scan base-package="" />
+ 
+ class level annotation.
+ 
+ ========================================================
+ 
+ @Value : = set an attribute
+ 
+ field level annotation.
+ =========================================================
+ ApplicationContext appContext = new 
+    		   AnnotationConfigApplicationContext(Car.class);
+      // Car car=(Car) appContext.getBean("carAudi");//beanfactory
+      Car car2=appContext.getBean( Car.class);//appcontext
+ car2.setModelId(18198);
+       car2.setModelName("abc");
+       car2.setFuelType("pqr");
+       System.out.println(car2);
+	   
+=============================================================
+ 
+ 
+ 
+ 
+	 
